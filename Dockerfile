@@ -41,6 +41,8 @@ RUN test -f packages/plugins/examples/plugin-tactics-journal-research/dist/manif
 FROM base AS production
 WORKDIR /app
 COPY --chown=node:node --from=build /app /app
+COPY scripts/paperclip-startup.sh /usr/local/bin/paperclip-startup.sh
+RUN chmod +x /usr/local/bin/paperclip-startup.sh
 RUN npm install --global --omit=dev @anthropic-ai/claude-code@latest @openai/codex@latest opencode-ai \
   && mkdir -p /paperclip \
   && chown node:node /paperclip
@@ -61,4 +63,4 @@ ENV NODE_ENV=production \
 EXPOSE 3100
 
 USER node
-CMD ["node", "--import", "./server/node_modules/tsx/dist/loader.mjs", "server/dist/index.js"]
+CMD ["/usr/local/bin/paperclip-startup.sh"]
