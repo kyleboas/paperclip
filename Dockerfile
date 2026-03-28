@@ -53,8 +53,9 @@ ENV NODE_ENV=production \
   PAPERCLIP_HOME=/paperclip \
   PAPERCLIP_INSTANCE_ID=default \
   PAPERCLIP_CONFIG=/paperclip/instances/default/config.json \
-  PAPERCLIP_DEPLOYMENT_MODE=local_trusted \
-  PAPERCLIP_DEPLOYMENT_EXPOSURE=private
+  PAPERCLIP_DEPLOYMENT_MODE=authenticated \
+  PAPERCLIP_DEPLOYMENT_EXPOSURE=private \
+  BETTER_AUTH_SECRET=railway-paperclip-tactics-journal-2024-secure-key-32chars
 
 EXPOSE 3100
 
