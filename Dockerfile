@@ -1,6 +1,6 @@
 FROM node:lts-trixie-slim AS base
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends ca-certificates curl git \
+  && apt-get install -y --no-install-recommends ca-certificates curl git su-exec \
   && rm -rf /var/lib/apt/lists/*
 RUN corepack enable
 
@@ -66,5 +66,6 @@ ENV NODE_ENV=production \
 
 EXPOSE 3100
 
-USER node
+# Do NOT set USER here — startup script runs as root to chown the volume,
+# then drops to 'node' via su-exec before launching the app
 CMD ["/usr/local/bin/paperclip-startup.sh"]

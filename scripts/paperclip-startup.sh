@@ -2,12 +2,21 @@
 set -e
 
 DATA_DIR="${PAPERCLIP_HOME:-/paperclip}"
+
+# Fix volume ownership — Railway mounts volumes as root:root
+# This runs as root BEFORE the node user takes over
+if [ "$(id -u)" = "0" ]; then
+  chown -R node:node "$DATA_DIR" 2>/dev/null || true
+  echo "[init] Fixed ownership on $DATA_DIR"
+  exec su-exec node:node "$0" "$@"
+fi
+
+# Below here runs as 'node' user
 PUBLIC_URL="${PAPERCLIP_PUBLIC_URL:-}"
 
-# Ensure data directories exist with correct ownership.
-# When a Railway volume is mounted at /paperclip it starts empty on first use.
-mkdir -p "$DATA_DIR/instances/default" 2>/dev/null || true
-mkdir -p "$DATA_DIR/.hermes" 2>/dev/null || true
+# Ensure data directories exist
+mkdir -p "$DATA_DIR/instances/default"
+mkdir -p "$DATA_DIR/.hermes"
 
 # Set up Hermes config if not already present
 HERMES_DIR="$DATA_DIR/.hermes"
