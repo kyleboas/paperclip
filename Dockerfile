@@ -55,7 +55,8 @@ ENV NODE_ENV=production \
   PAPERCLIP_CONFIG=/paperclip/instances/default/config.json \
   PAPERCLIP_DEPLOYMENT_MODE=authenticated \
   PAPERCLIP_DEPLOYMENT_EXPOSURE=private \
-  BETTER_AUTH_SECRET=railway-paperclip-tactics-journal-2024-secure-key-32chars
+  BETTER_AUTH_SECRET=railway-paperclip-tactics-journal-2024-secure-key-32chars \
+  PAPERCLIP_ALLOWED_HOSTNAMES=paperclip-production-067b.up.railway.app
 
 EXPOSE 3100
 
