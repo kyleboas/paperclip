@@ -1,11 +1,11 @@
 #!/bin/sh
 set -e
 
-DATA_DIR="${PAPERCLIP_DATA_DIR:-${PAPERCLIP_HOME:-/paperclip}}"
+DATA_DIR="${PAPERCLIP_HOME:-/paperclip}"
 PUBLIC_URL="${PAPERCLIP_PUBLIC_URL:-}"
 
-# Ensure data directories exist with correct ownership
-# (volume mount starts empty; node user needs write access)
+# Ensure data directories exist with correct ownership.
+# When a Railway volume is mounted at /paperclip it starts empty on first use.
 mkdir -p "$DATA_DIR/instances/default" 2>/dev/null || true
 mkdir -p "$DATA_DIR/.hermes" 2>/dev/null || true
 
