@@ -139,6 +139,14 @@ const BUNDLED_PLUGIN_EXAMPLES: AvailablePluginExample[] = [
     localPath: "packages/plugins/examples/plugin-kitchen-sink-example",
     tag: "example",
   },
+  {
+    packageName: "@paperclipai/plugin-tactics-journal-research",
+    pluginKey: "tactics-journal-research",
+    displayName: "Tactics Journal Research",
+    description: "Embeds the Railway-hosted Tactics Journal research dashboard as a first-class Paperclip page.",
+    localPath: "packages/plugins/examples/plugin-tactics-journal-research",
+    tag: "example",
+  },
 ];
 
 function listBundledPluginExamples(): AvailablePluginExample[] {

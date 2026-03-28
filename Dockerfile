@@ -21,6 +21,7 @@ COPY packages/adapters/openclaw-gateway/package.json packages/adapters/openclaw-
 COPY packages/adapters/opencode-local/package.json packages/adapters/opencode-local/
 COPY packages/adapters/pi-local/package.json packages/adapters/pi-local/
 COPY packages/plugins/sdk/package.json packages/plugins/sdk/
+COPY packages/plugins/examples/plugin-tactics-journal-research/package.json packages/plugins/examples/plugin-tactics-journal-research/
 COPY patches/ patches/
 
 RUN pnpm install --frozen-lockfile
@@ -29,10 +30,13 @@ FROM base AS build
 WORKDIR /app
 COPY --from=deps /app /app
 COPY . .
+RUN pnpm install --no-frozen-lockfile
 RUN pnpm --filter @paperclipai/ui build
 RUN pnpm --filter @paperclipai/plugin-sdk build
+RUN pnpm --filter @paperclipai/plugin-tactics-journal-research build
 RUN pnpm --filter @paperclipai/server build
 RUN test -f server/dist/index.js || (echo "ERROR: server build output missing" && exit 1)
+RUN test -f packages/plugins/examples/plugin-tactics-journal-research/dist/manifest.js || (echo "ERROR: tactics journal plugin build output missing" && exit 1)
 
 FROM base AS production
 WORKDIR /app
