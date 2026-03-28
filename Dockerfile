@@ -44,6 +44,10 @@ COPY --chown=node:node --from=build /app /app
 COPY scripts/paperclip-startup.sh /usr/local/bin/paperclip-startup.sh
 RUN chmod +x /usr/local/bin/paperclip-startup.sh
 RUN npm install --global --omit=dev @anthropic-ai/claude-code@latest @openai/codex@latest opencode-ai \
+  && apt-get update \
+  && apt-get install -y --no-install-recommends python3 python3-pip python3-venv \
+  && rm -rf /var/lib/apt/lists/* \
+  && python3 -m pip install --no-cache-dir --break-system-packages git+https://github.com/NousResearch/hermes-agent.git \
   && mkdir -p /paperclip \
   && chown node:node /paperclip
 
