@@ -10,7 +10,12 @@ if [ ! -f "$HERMES_DIR/config.yaml" ]; then
   echo "[init] Setting up Hermes Agent config..."
   mkdir -p "$HERMES_DIR"
   printf "model: glm-5.1\nprovider: zai\n" > "$HERMES_DIR/config.yaml"
-  chown -R node:node "$HERMES_DIR"
+fi
+
+# Run Paperclip onboard if no config exists
+if [ ! -f "$DATA_DIR/instances/default/config.json" ]; then
+  echo "[init] Running Paperclip onboard..."
+  pnpm paperclipai onboard -y -d "$DATA_DIR" 2>&1 || echo "[init] Onboard skipped"
 fi
 
 # Auto-bootstrap admin on first run
