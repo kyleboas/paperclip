@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-DATA_DIR="${PAPERCLIP_HOME:-/paperclip}"
+DATA_DIR="${PAPERCLIP_DATA_DIR:-${PAPERCLIP_HOME:-/paperclip}}"
 PUBLIC_URL="${PAPERCLIP_PUBLIC_URL:-}"
 
 # Ensure data directories exist with correct ownership
