@@ -1,14 +1,1 @@
-[phases.setup]
-nixPkgs = ["nodejs_22", "pnpm"]
-
-[phases.install]
-cmds = ["pnpm install --frozen-lockfile"]
-
-[phases.build]
-cmds = [
-  "pnpm -r build",
-  "bash scripts/prepare-server-ui-dist.sh"
-]
-
-[start]
-cmd = "pnpm --filter @paperclipai/server start"
+# Disabled - using Dockerfile instead
