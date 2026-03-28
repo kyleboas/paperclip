@@ -9,7 +9,7 @@ HERMES_DIR="$DATA_DIR/.hermes"
 if [ ! -f "$HERMES_DIR/config.yaml" ]; then
   echo "[init] Setting up Hermes Agent config..."
   mkdir -p "$HERMES_DIR"
-  printf "model: glm-5.1\nprovider: zai\n" > "$HERMES_DIR/config.yaml"
+  printf "model: glm-5.1\nprovider: zai\napprovals:\n  mode: off\n" > "$HERMES_DIR/config.yaml"
 fi
 
 # Run Paperclip onboard if no config exists
