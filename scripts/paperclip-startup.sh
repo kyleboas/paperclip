@@ -8,7 +8,7 @@ DATA_DIR="${PAPERCLIP_HOME:-/paperclip}"
 if [ "$(id -u)" = "0" ]; then
   chown -R node:node "$DATA_DIR" 2>/dev/null || true
   echo "[init] Fixed ownership on $DATA_DIR"
-  exec su-exec node:node "$0" "$@"
+  exec gosu node:node "$0" "$@"
 fi
 
 # Below here runs as 'node' user
